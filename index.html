@@ -6,17 +6,17 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>Hexo</title>
+  <title>LTJ博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
+<meta property="og:title" content="LTJ博客">
 <meta property="og:url" content="http://example.com/index.html">
-<meta property="og:site_name" content="Hexo">
+<meta property="og:site_name" content="LTJ博客">
 <meta property="og:locale" content="en_US">
-<meta property="article:author" content="John Doe">
+<meta property="article:author" content="LTJ">
 <meta name="twitter:card" content="summary">
   
-    <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
+    <link rel="alternative" href="/atom.xml" title="LTJ博客" type="application/atom+xml">
   
   
     <link rel="icon" href="/favicon.png">
@@ -152,6 +152,75 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-newpapername" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2023/04/25/newpapername/">newpapername</a>
+    </h1>
+  
+
+        
+        <a href="/2023/04/25/newpapername/" class="archive-article-date">
+  	<time datetime="2023-04-25T10:04:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-04-25</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>uniapp-bug</p>
+<p>点击第二个tab时候会加载视频列表，当视频列表还没加载完成的时候，快速切换到第一个tab，刚才的数据加载到了第一个tab列表去了。</p>
+<p><img src="C:\Users\Admin\AppData\Roaming\Typora\typora-user-images\image-20230428180759521.png" alt="image-20230428180759521"></p>
+<p><img src="C:\Users\Admin\AppData\Roaming\Typora\typora-user-images\image-20230428180817047.png" alt="image-20230428180817047"></p>
+<p><img src="C:\Users\Admin\AppData\Roaming\Typora\typora-user-images\image-20230428180826989.png" alt="image-20230428180826989"></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="title function_">data</span>(<span class="params"></span>) &#123;</span><br><span class="line">			<span class="keyword">return</span> &#123;</span><br><span class="line">				<span class="attr">flag</span>: <span class="number">0</span>, <span class="comment">//当前tabs索引，防止数据为请求完成，快速切换tab导致数据错乱</span></span><br><span class="line">			&#125;</span><br><span class="line">		&#125;,</span><br><span class="line">            </span><br><span class="line"><span class="comment">// tabs点击事件</span></span><br><span class="line"> <span class="title function_">tabsClick</span>(<span class="params">option</span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">currentIndex</span> = option.<span class="property">index</span>;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">flag</span> = option.<span class="property">index</span> <span class="comment">//防止数据为请求完成，快速切换tab导致数据错乱</span></span><br><span class="line">   &#125;,</span><br><span class="line"><span class="comment">// 通过频道id获取视频</span></span><br><span class="line"><span class="keyword">async</span> <span class="title function_">getVideoListById</span>(<span class="params">id,page,size,x</span>) &#123; <span class="comment">//接受一个x</span></span><br><span class="line">    <span class="keyword">const</span> result =  <span class="keyword">await</span> <span class="title function_">getVideoListByChannel</span>(&#123;</span><br><span class="line">        <span class="attr">videoCategoryId</span>: id,</span><br><span class="line">        <span class="attr">pageable</span>:&#123;</span><br><span class="line">            page,</span><br><span class="line">            size,</span><br><span class="line">            <span class="attr">sort</span>: <span class="string">&quot;id&quot;</span>,</span><br><span class="line">            <span class="attr">desc</span>: <span class="literal">true</span></span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="attr">dataType</span>: <span class="string">&#x27;string&#x27;</span></span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">channelList</span>[<span class="variable language_">this</span>.<span class="property">currentIndex</span>].<span class="property">page</span>++;</span><br><span class="line">    <span class="keyword">return</span> [result, x] </span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 加载第一次视频列表</span></span><br><span class="line">    <span class="keyword">async</span> <span class="title function_">firstload</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="variable language_">this</span>.$forceUpdate()</span><br><span class="line">        <span class="keyword">const</span> &#123;id,page,size,isAll&#125; = <span class="variable language_">this</span>.<span class="property">channelList</span>[<span class="variable language_">this</span>.<span class="property">currentIndex</span>];</span><br><span class="line">        <span class="keyword">const</span> res = <span class="keyword">await</span> <span class="variable language_">this</span>.<span class="title function_">getVideoListById</span>(id,page,size,<span class="variable language_">this</span>.<span class="property">flag</span>);</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">channelList</span>[res[<span class="number">1</span>]].<span class="property">firstLoading</span> = <span class="literal">false</span></span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">channelList</span>[res[<span class="number">1</span>]].<span class="property">list</span> = res[<span class="number">0</span>]</span><br><span class="line">        <span class="variable language_">this</span>.$forceUpdate()</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="comment">// 加载更多</span></span><br><span class="line">    <span class="keyword">async</span> <span class="title function_">loadMore</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="keyword">if</span>(isAll) &#123;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">const</span> &#123;id,page,size,isAll&#125; = <span class="variable language_">this</span>.<span class="property">channelList</span>[<span class="variable language_">this</span>.<span class="property">currentIndex</span>];</span><br><span class="line">        <span class="keyword">const</span> res = <span class="keyword">await</span> <span class="variable language_">this</span>.<span class="title function_">getVideoListById</span>(id,page,size, <span class="variable language_">this</span>.<span class="property">flag</span>);</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">loadStatus</span> = <span class="string">&#x27;loading&#x27;</span>;</span><br><span class="line">        <span class="keyword">if</span>(res[<span class="number">0</span>].<span class="property">length</span> &lt; size) &#123;</span><br><span class="line">            <span class="variable language_">this</span>.<span class="property">loadStatus</span> = <span class="string">&#x27;nomore&#x27;</span>;</span><br><span class="line">            <span class="variable language_">this</span>.<span class="property">channelList</span>[res[<span class="number">1</span>]].<span class="property">isAll</span> = <span class="literal">true</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 防止加载更多时还没加载完马上切换到别的tab出现bug</span></span><br><span class="line">        <span class="comment">// if(this.channelList[this.currentIndex].firstLoading) &#123;</span></span><br><span class="line">        <span class="comment">// 	return;</span></span><br><span class="line">        <span class="comment">// &#125;</span></span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">channelList</span>[res[<span class="number">1</span>]].<span class="property">list</span>.<span class="title function_">push</span>(...res[<span class="number">0</span>]);</span><br><span class="line">        <span class="variable language_">this</span>.$forceUpdate()</span><br><span class="line">    &#125;,</span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2023/04/25/newpapername/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-hello-world" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -237,7 +306,7 @@
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2023 John Doe
+    		&copy; 2023 LTJ
     	</div>
       	<div class="footer-right">
       		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
